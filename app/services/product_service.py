@@ -36,9 +36,9 @@ class ProductService:
         if search:
             words = [w.strip() for w in search.split() if w.strip()]
             for word in words:
-                where_clauses.append("(name ILIKE %s OR brand ILIKE %s OR car_model ILIKE %s)")
+                where_clauses.append("(name ILIKE %s OR brand ILIKE %s OR car_model ILIKE %s OR description ILIKE %s)")
                 search_term = f"%{word}%"
-                params.extend([search_term, search_term, search_term])
+                params.extend([search_term, search_term, search_term, search_term])
 
         if category:
             where_clauses.append("category = %s")
