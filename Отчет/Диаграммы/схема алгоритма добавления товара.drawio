@@ -1,0 +1,106 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.1 Chrome/142.0.7444.265 Electron/39.8.0 Safari/537.36" version="29.6.1">
+  <diagram id="admin_flowchart" name="Admin Flowchart">
+    <mxGraphModel dx="1213" dy="828" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Start" parent="1" style="shape=ellipse;whiteSpace=wrap;html=1;" value="Начало" vertex="1">
+          <mxGeometry height="50" width="100" x="400" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="IsAdmin" parent="1" style="shape=rhombus;whiteSpace=wrap;html=1;" value="Пользователь&#xa;Администратор?" vertex="1">
+          <mxGeometry height="80" width="140" x="380" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="AuthError" parent="1" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;" value="Ошибка доступа" vertex="1">
+          <mxGeometry height="50" width="120" x="200" y="165" as="geometry" />
+        </mxCell>
+        <mxCell id="EndError" parent="1" style="shape=ellipse;whiteSpace=wrap;html=1;" value="Конец (Отказ)" vertex="1">
+          <mxGeometry height="50" width="120" x="200" y="265" as="geometry" />
+        </mxCell>
+        <mxCell id="InputData" parent="1" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;" value="Ввод данных товара&#xa;(цена, бренд, кол-во)" vertex="1">
+          <mxGeometry height="50" width="140" x="380" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="Validation" parent="1" style="shape=rhombus;whiteSpace=wrap;html=1;" value="Данные&#xa;корректны?" vertex="1">
+          <mxGeometry height="80" width="140" x="380" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="ValidError" parent="1" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;" value="Уведомление&#xa;об ошибке" vertex="1">
+          <mxGeometry height="50" width="120" x="200" y="395" as="geometry" />
+        </mxCell>
+        <mxCell id="CheckExist" parent="1" style="shape=rhombus;whiteSpace=wrap;html=1;" value="Товар уже&#xa;существует в БД?" vertex="1">
+          <mxGeometry height="80" width="140" x="380" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="UpdateStock" parent="1" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;" value="Обновление&#xa;остатков" vertex="1">
+          <mxGeometry height="50" width="120" x="600" y="525" as="geometry" />
+        </mxCell>
+        <mxCell id="EndUpdate" parent="1" style="shape=ellipse;whiteSpace=wrap;html=1;" value="Конец&#xa;(Обновлено)" vertex="1">
+          <mxGeometry height="50" width="120" x="600" y="640" as="geometry" />
+        </mxCell>
+        <mxCell id="SaveDB" parent="1" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;" value="Сохранение в&#xa;таблицу Product" vertex="1">
+          <mxGeometry height="50" width="120" x="390" y="640" as="geometry" />
+        </mxCell>
+        <mxCell id="SuccessMsg" parent="1" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;" value="Товар успешно&#xa;добавлен" vertex="1">
+          <mxGeometry height="50" width="120" x="390" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="EndSuccess" parent="1" style="shape=ellipse;whiteSpace=wrap;html=1;" value="Конец (Успех)" vertex="1">
+          <mxGeometry height="50" width="120" x="390" y="840" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="Start" style="endArrow=classic;html=1;rounded=0;" target="IsAdmin" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="IsAdmin" style="endArrow=classic;html=1;rounded=0;" target="AuthError" value="Нет">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_e2" connectable="0" parent="e2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Нет" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="AuthError" style="endArrow=classic;html=1;rounded=0;" target="EndError" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="IsAdmin" style="endArrow=classic;html=1;rounded=0;" target="InputData" value="Да">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_e4" connectable="0" parent="e4" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Да" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="InputData" style="endArrow=classic;html=1;rounded=0;" target="Validation" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="Validation" style="endArrow=classic;html=1;rounded=0;" target="ValidError" value="Нет">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_e6" connectable="0" parent="e6" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Нет" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="ValidError" style="endArrow=classic;html=1;rounded=0;" target="InputData" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="Validation" style="endArrow=classic;html=1;rounded=0;" target="CheckExist" value="Да">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_e8" connectable="0" parent="e8" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Да" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="CheckExist" style="endArrow=classic;html=1;rounded=0;" target="UpdateStock" value="Да">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_e9" connectable="0" parent="e9" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Да" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="UpdateStock" style="endArrow=classic;html=1;rounded=0;" target="EndUpdate" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="CheckExist" style="endArrow=classic;html=1;rounded=0;" target="SaveDB" value="Нет">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_e11" connectable="0" parent="e11" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Нет" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="SaveDB" style="endArrow=classic;html=1;rounded=0;" target="SuccessMsg" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="SuccessMsg" style="endArrow=classic;html=1;rounded=0;" target="EndSuccess" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

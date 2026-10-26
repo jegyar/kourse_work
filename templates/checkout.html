@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block title %}Оформление заказа — AutoParts{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto space-y-5">
+    <!-- Breadcrumbs & Headline -->
+    <div class="pb-3 border-b border-slate-200">
+        <nav class="flex items-center gap-1.5 text-xs text-slate-500 mb-1" aria-label="Хлебные крошки">
+            <a href="/" class="hover:text-slate-800">Главная</a>
+            <span>/</span>
+            <a href="/cart" class="hover:text-slate-800">Корзина</a>
+            <span>/</span>
+            <span class="text-slate-800 font-semibold">Оформление</span>
+        </nav>
+        <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
+            Оформление заказа на поставку автодеталей
+        </h1>
+    </div>
+
+    <!-- Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+        <div class="lg:col-span-2 space-y-4">
+            <form id="checkoutForm" class="bg-white border border-slate-300 rounded p-5 shadow-subtle space-y-4">
+                <h2 class="font-bold text-sm uppercase tracking-wider text-slate-900 pb-2 border-b border-slate-100">
+                    1. Адрес и контактные данные получателя
+                </h2>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label for="city" class="block text-xs font-semibold text-slate-700 mb-1">Город / Населенный пункт *</label>
+                        <input type="text" id="city" required placeholder="Минск" class="w-full h-9 px-3 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800">
+                    </div>
+                    <div>
+                        <label for="postal" class="block text-xs font-semibold text-slate-700 mb-1">Почтовый индекс *</label>
+                        <input type="text" id="postal" required placeholder="220000" class="w-full h-9 px-3 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label for="address" class="block text-xs font-semibold text-slate-700 mb-1">Улица, номер дома, офис / квартира *</label>
+                        <input type="text" id="address" required placeholder="пр-т Победителей 45, оф. 12" class="w-full h-9 px-3 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label for="phone" class="block text-xs font-semibold text-slate-700 mb-1">Контактный телефон *</label>
+                        <input type="tel" id="phone" required placeholder="+375 (29) 000-00-00" class="w-full h-9 px-3 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800">
+                    </div>
+                </div>
+
+                <h2 class="font-bold text-sm uppercase tracking-wider text-slate-900 pt-2 pb-2 border-b border-slate-100">
+                    2. Условия взаиморасчетов
+                </h2>
+
+                <div class="space-y-2 text-xs">
+                    <label class="flex items-center gap-2.5 p-2.5 rounded border border-slate-300 hover:bg-slate-50 cursor-pointer">
+                        <input type="radio" name="payment_method" value="card" checked class="text-orange-600 focus:ring-orange-500">
+                        <div>
+                            <span class="font-bold text-slate-800">Банковская карта (онлайн-платеж)</span>
+                            <span class="text-slate-500 block text-[11px]">БЕЛКАРТ, Visa, MasterCard, МИР</span>
+                        </div>
+                    </label>
+                    <label class="flex items-center gap-2.5 p-2.5 rounded border border-slate-300 hover:bg-slate-50 cursor-pointer">
+                        <input type="radio" name="payment_method" value="cash" class="text-orange-600 focus:ring-orange-500">
+                        <div>
+                            <span class="font-bold text-slate-800">Оплата при получении курьеру</span>
+                            <span class="text-slate-500 block text-[11px]">Наличный расчет или банковский терминал</span>
+                        </div>
+                    </label>
+                </div>
+
+                <button type="submit" id="submitOrderBtn" class="w-full h-10 bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs rounded transition-colors mt-2">
+                    Подтвердить и отправить заказ
+                </button>
+            </form>
+        </div>
+
+        <!-- Order Summary -->
+        <aside class="lg:col-span-1 sticky top-20">
+            <div class="bg-white border border-slate-300 rounded p-4 shadow-subtle space-y-3">
+                <h3 class="font-bold text-xs uppercase tracking-wider text-slate-900 pb-2 border-b border-slate-100">
+                    Позиции к поставке
+                </h3>
+                <div id="checkoutItemsList" class="space-y-2 max-h-56 overflow-y-auto text-xs divide-y divide-slate-100">
+                    <div class="text-slate-400">Загрузка...</div>
+                </div>
+                <div class="pt-2 border-t border-slate-200 flex justify-between items-baseline">
+                    <span class="text-xs font-bold text-slate-600">К оплате:</span>
+                    <span id="checkoutTotal" class="text-base font-extrabold text-slate-900">0.00 BYN</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    const token = getToken();
+    if (!token) {
+        showNotification('Необходима авторизация', 'warning');
+        setTimeout(() => window.location.href = '/login', 1200);
+        return;
+    }
+
+    try {
+        const resp = await apiRequest('/cart/');
+        if (resp && resp.ok) {
+            const data = await resp.json();
+            if (!data.items || data.items.length === 0) {
+                window.location.href = '/catalog';
+                return;
+            }
+            renderCheckout(data);
+        }
+    } catch (e) {}
+});
+
+function renderCheckout(data) {
+    const list = document.getElementById('checkoutItemsList');
+    const total = document.getElementById('checkoutTotal');
+    if (!list) return;
+
+    list.innerHTML = data.items.map(i => `
+        <div class="pt-1.5 first:pt-0 flex justify-between gap-2">
+            <span class="truncate text-slate-700">${i.name} (×${i.quantity})</span>
+            <span class="font-bold text-slate-900 whitespace-nowrap">${(i.quantity * i.price).toFixed(2)} BYN</span>
+        </div>
+    `).join('');
+
+    if (total) total.textContent = data.total_amount.toFixed(2) + ' BYN';
+}
+
+document.getElementById('checkoutForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('submitOrderBtn');
+    btn.disabled = true;
+    btn.textContent = 'Обработка заявки...';
+
+    const paymentEl = document.querySelector('input[name="payment_method"]:checked');
+    const payload = {
+        delivery: {
+            city: document.getElementById('city').value.trim(),
+            address: document.getElementById('address').value.trim(),
+            postal_code: document.getElementById('postal').value.trim(),
+            phone: document.getElementById('phone').value.trim()
+        },
+        payment_method: paymentEl ? paymentEl.value : 'card'
+    };
+
+    try {
+        const resp = await apiRequest('/orders_api/', {
+            method: 'POST',
+            body: JSON.stringify(payload)
+        });
+
+        if (resp && resp.ok) {
+            showNotification('Заказ успешно зарегистрирован', 'success');
+            if (typeof updateCartBadge === 'function') updateCartBadge();
+            setTimeout(() => window.location.href = '/orders', 1000);
+        } else if (resp) {
+            const err = await resp.json();
+            showNotification(err.detail || 'Ошибка оформления', 'error');
+            btn.disabled = false;
+            btn.textContent = 'Подтвердить и отправить заказ';
+        }
+    } catch (e) {
+        showNotification('Ошибка связи с сервером', 'error');
+        btn.disabled = false;
+        btn.textContent = 'Подтвердить и отправить заказ';
+    }
+});
+</script>
+{% endblock %}

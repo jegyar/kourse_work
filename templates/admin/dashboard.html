@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+
+{% block title %}Администрирование — AutoParts{% endblock %}
+
+{% block content %}
+<div class="space-y-5">
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-3 border-b border-slate-200">
+        <div>
+            <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-slate-900 text-white">
+                    Панель администратора
+                </span>
+                <span class="text-xs text-slate-500">Система складского учета</span>
+            </div>
+            <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 mt-1">
+                Управление магазином автозапчастей
+            </h1>
+        </div>
+
+        <div class="flex items-center gap-2">
+            <button type="button" onclick="downloadReport('excel')" class="px-3 py-1.5 rounded border border-slate-300 bg-white hover:bg-slate-50 font-semibold text-xs text-slate-700 transition-colors">
+                Экспорт в Excel
+            </button>
+            <button type="button" onclick="downloadReport('word')" class="px-3 py-1.5 rounded border border-slate-300 bg-white hover:bg-slate-50 font-semibold text-xs text-slate-700 transition-colors">
+                Сводка Word
+            </button>
+        </div>
+    </div>
+
+    <!-- Admin Tabs + Content -->
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
+        <!-- Sidebar Navigation -->
+        <aside class="lg:col-span-1 space-y-1">
+            <div class="bg-white border border-slate-300 rounded p-2 shadow-subtle space-y-1">
+                <button type="button" onclick="showTab('dashboard')" class="admin-nav-link active w-full px-3 py-2 rounded text-xs font-bold text-left bg-slate-900 text-white transition-colors" data-tab="dashboard">
+                    Обзор и сводка
+                </button>
+                <button type="button" onclick="showTab('products')" class="admin-nav-link w-full px-3 py-2 rounded text-xs font-semibold text-slate-700 hover:bg-slate-100 text-left transition-colors" data-tab="products">
+                    Каталог товаров
+                </button>
+                <button type="button" onclick="showTab('orders')" class="admin-nav-link w-full px-3 py-2 rounded text-xs font-semibold text-slate-700 hover:bg-slate-100 text-left transition-colors" data-tab="orders">
+                    Журнал заказов
+                </button>
+                <button type="button" onclick="showTab('users')" class="admin-nav-link w-full px-3 py-2 rounded text-xs font-semibold text-slate-700 hover:bg-slate-100 text-left transition-colors" data-tab="users">
+                    Пользователи
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="lg:col-span-4 space-y-5">
+            <!-- TAB 1: DASHBOARD -->
+            <div id="tab-dashboard" class="admin-tab space-y-5">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-3" id="statsCards">
+                    <div class="p-4 bg-white border border-slate-200 rounded skeleton h-20"></div>
+                    <div class="p-4 bg-white border border-slate-200 rounded skeleton h-20"></div>
+                    <div class="p-4 bg-white border border-slate-200 rounded skeleton h-20"></div>
+                    <div class="p-4 bg-white border border-slate-200 rounded skeleton h-20"></div>
+                </div>
+
+                <!-- Recent Orders -->
+                <div class="bg-white border border-slate-300 rounded overflow-hidden shadow-subtle">
+                    <div class="p-3.5 border-b border-slate-200 flex items-center justify-between">
+                        <h2 class="font-bold text-xs uppercase tracking-wider text-slate-900">Последние заказы в системе</h2>
+                        <button type="button" onclick="showTab('orders')" class="text-xs font-semibold text-orange-600 hover:underline">
+                            Все заказы →
+                        </button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-slate-50 text-slate-500 uppercase text-[10px] font-bold border-b border-slate-200">
+                                <tr>
+                                    <th class="px-4 py-2.5">ID</th>
+                                    <th class="px-4 py-2.5">Клиент</th>
+                                    <th class="px-4 py-2.5">Сумма</th>
+                                    <th class="px-4 py-2.5">Статус</th>
+                                    <th class="px-4 py-2.5">Дата</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentOrdersBody" class="divide-y divide-slate-100"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: PRODUCTS -->
+            <div id="tab-products" class="admin-tab hidden space-y-4">
+                <div class="bg-white border border-slate-300 rounded p-3.5 shadow-subtle flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div class="flex items-center gap-2">
+                        <button type="button" onclick="showProductModal()" class="h-8 px-3 rounded bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-colors">
+                            + Добавить товар
+                        </button>
+                        <div class="flex items-center border border-slate-300 rounded overflow-hidden text-xs font-semibold">
+                            <button type="button" onclick="exportProducts('csv')" class="px-2.5 py-1.5 hover:bg-slate-100 border-r border-slate-300">CSV</button>
+                            <button type="button" onclick="exportProducts('json')" class="px-2.5 py-1.5 hover:bg-slate-100 border-r border-slate-300">JSON</button>
+                            <button type="button" onclick="exportProducts('xml')" class="px-2.5 py-1.5 hover:bg-slate-100">XML</button>
+                        </div>
+                    </div>
+
+                    <!-- Import -->
+                    <form id="importForm" class="flex items-center gap-2">
+                        <input type="file" id="importFile" accept=".csv,.json,.xml" class="text-xs text-slate-500 file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-slate-100 hover:file:bg-slate-200">
+                        <button type="submit" class="h-8 px-3 rounded bg-emerald-700 hover:bg-emerald-800 text-white font-semibold text-xs">
+                            Импорт
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Products Table -->
+                <div class="bg-white border border-slate-300 rounded overflow-hidden shadow-subtle">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-slate-50 text-slate-500 uppercase text-[10px] font-bold border-b border-slate-200">
+                                <tr>
+                                    <th class="px-3 py-2.5">ID</th>
+                                    <th class="px-3 py-2.5">Наименование</th>
+                                    <th class="px-3 py-2.5">Бренд</th>
+                                    <th class="px-3 py-2.5">Категория</th>
+                                    <th class="px-3 py-2.5">Цена</th>
+                                    <th class="px-3 py-2.5">Склад</th>
+                                    <th class="px-3 py-2.5">Статус</th>
+                                    <th class="px-3 py-2.5 text-right">Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productsBody" class="divide-y divide-slate-100"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: ORDERS -->
+            <div id="tab-orders" class="admin-tab hidden space-y-4">
+                <div class="bg-white border border-slate-200 rounded p-3 shadow-subtle flex items-center justify-between">
+                    <div class="flex items-center gap-2 text-xs">
+                        <span class="font-semibold text-slate-600">Статус:</span>
+                        <select id="orderStatusFilter" onchange="loadAdminOrders()" class="h-8 px-2 text-xs border border-slate-300 rounded bg-white">
+                            <option value="">Все заказы</option>
+                            <option value="new">Новые</option>
+                            <option value="confirmed">Подтверждённые</option>
+                            <option value="processing">В обработке</option>
+                            <option value="shipped">Отправленные</option>
+                            <option value="delivered">Доставленные</option>
+                            <option value="cancelled">Отменённые</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded overflow-hidden shadow-subtle">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-slate-50 text-slate-500 uppercase text-[10px] font-bold border-b border-slate-200">
+                                <tr>
+                                    <th class="px-3 py-2.5">ID</th>
+                                    <th class="px-3 py-2.5">Клиент</th>
+                                    <th class="px-3 py-2.5">Сумма</th>
+                                    <th class="px-3 py-2.5">Статус</th>
+                                    <th class="px-3 py-2.5">Дата</th>
+                                    <th class="px-3 py-2.5 text-right">Управление</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ordersBody" class="divide-y divide-slate-100"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: USERS -->
+            <div id="tab-users" class="admin-tab hidden space-y-4">
+                <div class="bg-white border border-slate-200 rounded overflow-hidden shadow-subtle">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-slate-50 text-slate-500 uppercase text-[10px] font-bold border-b border-slate-200">
+                                <tr>
+                                    <th class="px-3 py-2.5">ID</th>
+                                    <th class="px-3 py-2.5">E-mail</th>
+                                    <th class="px-3 py-2.5">ФИО</th>
+                                    <th class="px-3 py-2.5">Роль</th>
+                                    <th class="px-3 py-2.5">Дата регистрации</th>
+                                    <th class="px-3 py-2.5 text-right">Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersBody" class="divide-y divide-slate-100"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- Technical Product Modal Dialog -->
+<div id="productModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs hidden">
+    <div class="bg-white rounded border border-slate-300 shadow-xl max-w-lg w-full p-5 space-y-4">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-200">
+            <h3 class="font-bold text-sm text-slate-900" id="productModalTitle">Спецификация товара</h3>
+            <button type="button" onclick="closeProductModal()" class="text-slate-400 hover:text-slate-700">✕</button>
+        </div>
+
+        <form id="productModalForm" class="space-y-3">
+            <input type="hidden" id="pId">
+            <div class="grid grid-cols-2 gap-2.5">
+                <div>
+                    <label class="block text-[11px] font-semibold text-slate-700 mb-1">Наименование *</label>
+                    <input id="pName" required class="w-full h-8 px-2 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-semibold text-slate-700 mb-1">Бренд *</label>
+                    <input id="pBrand" required class="w-full h-8 px-2 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-semibold text-slate-700 mb-1">Категория *</label>
+                    <input id="pCategory" required class="w-full h-8 px-2 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-semibold text-slate-700 mb-1">Модель автомобиля</label>
+                    <input id="pCarModel" class="w-full h-8 px-2 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-semibold text-slate-700 mb-1">Цена (BYN) *</label>
+                    <input type="number" step="0.01" id="pPrice" required class="w-full h-8 px-2 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-semibold text-slate-700 mb-1">Остаток на складе *</label>
+                    <input type="number" id="pStock" required class="w-full h-8 px-2 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-[11px] font-semibold text-slate-700 mb-1">Техническое описание</label>
+                <textarea id="pDesc" rows="2" class="w-full p-2 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800"></textarea>
+            </div>
+
+            <div class="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
+                <button type="button" onclick="closeProductModal()" class="px-3 py-1.5 rounded text-slate-600 text-xs font-semibold hover:bg-slate-100">
+                    Отмена
+                </button>
+                <button type="submit" class="px-4 py-1.5 rounded bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs">
+                    Сохранить
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/admin.js"></script>
+{% endblock %}

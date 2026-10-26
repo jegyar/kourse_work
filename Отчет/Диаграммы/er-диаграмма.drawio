@@ -1,0 +1,190 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.1 Chrome/142.0.7444.265 Electron/39.8.0 Safari/537.36" version="29.6.1">
+  <diagram id="er_diagram" name="ER Diagram">
+    <mxGraphModel dx="1213" dy="828" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Role" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;" value="Роль" vertex="1">
+          <mxGeometry height="50" width="100" x="100" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="User" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;" value="Пользователь" vertex="1">
+          <mxGeometry height="50" width="100" x="400" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="Product" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;" value="Товар" vertex="1">
+          <mxGeometry height="50" width="100" x="700" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="Order" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;" value="Заказ" vertex="1">
+          <mxGeometry height="50" width="100" x="400" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="Transaction" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;" value="Транзакция" vertex="1">
+          <mxGeometry height="50" width="100" x="400" y="1000" as="geometry" />
+        </mxCell>
+        <mxCell id="Delivery" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;" value="Доставка" vertex="1">
+          <mxGeometry height="50" width="100" x="700" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="HasRole" parent="1" style="shape=rhombus;whiteSpace=wrap;html=1;" value="Имеет" vertex="1">
+          <mxGeometry height="60" width="100" x="250" y="395" as="geometry" />
+        </mxCell>
+        <mxCell id="InCart" parent="1" style="shape=rhombus;whiteSpace=wrap;html=1;" value="В корзине" vertex="1">
+          <mxGeometry height="60" width="100" x="550" y="395" as="geometry" />
+        </mxCell>
+        <mxCell id="MakesOrder" parent="1" style="shape=rhombus;whiteSpace=wrap;html=1;" value="Оформляет" vertex="1">
+          <mxGeometry height="60" width="100" x="400" y="545" as="geometry" />
+        </mxCell>
+        <mxCell id="OrderContains" parent="1" style="shape=rhombus;whiteSpace=wrap;html=1;" value="Содержит" vertex="1">
+          <mxGeometry height="60" width="100" x="550" y="545" as="geometry" />
+        </mxCell>
+        <mxCell id="IsPaid" parent="1" style="shape=rhombus;whiteSpace=wrap;html=1;" value="Оплачивается" vertex="1">
+          <mxGeometry height="60" width="100" x="400" y="845" as="geometry" />
+        </mxCell>
+        <mxCell id="IsDelivered" parent="1" style="shape=rhombus;whiteSpace=wrap;html=1;" value="Доставляется" vertex="1">
+          <mxGeometry height="60" width="100" x="550" y="695" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="Role" style="endArrow=none;html=1;rounded=0;" target="HasRole" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="HasRole" style="endArrow=none;html=1;rounded=0;" target="User" value="N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="User" style="endArrow=none;html=1;rounded=0;" target="InCart" value="M">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="InCart" style="endArrow=none;html=1;rounded=0;" target="Product" value="N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="User" style="endArrow=none;html=1;rounded=0;" target="MakesOrder" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="MakesOrder" style="endArrow=none;html=1;rounded=0;" target="Order" value="N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="Order" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="OrderContains" value="M">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="OrderContains" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" target="Product" value="N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="Order" style="endArrow=none;html=1;rounded=0;" target="IsPaid" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="IsPaid" style="endArrow=none;html=1;rounded=0;" target="Transaction" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="Order" style="endArrow=none;html=1;rounded=0;" target="IsDelivered" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="IsDelivered" style="endArrow=none;html=1;rounded=0;" target="Delivery" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r_id" parent="1" style="shape=ellipse;whiteSpace=wrap;html=1;" value="ID роли" vertex="1">
+          <mxGeometry height="40" width="90" x="105" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="ea_r_id" edge="1" parent="1" source="r_id" style="endArrow=none;html=1;rounded=0;" target="Role" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r_name" parent="1" style="shape=ellipse;whiteSpace=wrap;html=1;" value="Название" vertex="1">
+          <mxGeometry height="40" width="90" x="105" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="ea_r_name" edge="1" parent="1" source="r_name" style="endArrow=none;html=1;rounded=0;" target="Role" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u_id" parent="1" style="shape=ellipse;whiteSpace=wrap;html=1;" value="ID польз." vertex="1">
+          <mxGeometry height="40" width="90" x="300" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="ea_u_id" edge="1" parent="1" source="u_id" style="endArrow=none;html=1;rounded=0;" target="User" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u_email" parent="1" style="shape=ellipse;whiteSpace=wrap;html=1;" value="Email" vertex="1">
+          <mxGeometry height="40" width="90" x="405" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="ea_u_email" edge="1" parent="1" source="u_email" style="endArrow=none;html=1;rounded=0;" target="User" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u_name" parent="1" style="shape=ellipse;whiteSpace=wrap;html=1;" value="Имя" vertex="1">
+          <mxGeometry height="40" width="90" x="500" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="ea_u_name" edge="1" parent="1" source="u_name" style="endArrow=none;html=1;rounded=0;" target="User" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p_id" parent="1" style="shape=ellipse;whiteSpace=wrap;html=1;" value="ID товара" vertex="1">
+          <mxGeometry height="40" width="90" x="705" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="ea_p_id" edge="1" parent="1" source="p_id" style="endArrow=none;html=1;rounded=0;" target="Product" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p_name" parent="1" style="shape=ellipse;whiteSpace=wrap;html=1;" value="Название" vertex="1">
+          <mxGeometry height="40" width="90" x="820" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="ea_p_name" edge="1" parent="1" source="p_name" style="endArrow=none;html=1;rounded=0;" target="Product" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p_price" parent="1" style="shape=ellipse;whiteSpace=wrap;html=1;" value="Цена" vertex="1">
+          <mxGeometry height="40" width="90" x="705" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="ea_p_price" edge="1" parent="1" source="p_price" style="endArrow=none;html=1;rounded=0;" target="Product" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p_stock" parent="1" style="shape=ellipse;whiteSpace=wrap;html=1;" value="Остаток" vertex="1">
+          <mxGeometry height="40" width="90" x="820" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="ea_p_stock" edge="1" parent="1" source="p_stock" style="endArrow=none;html=1;rounded=0;" target="Product" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o_id" parent="1" style="shape=ellipse;whiteSpace=wrap;html=1;" value="ID заказа" vertex="1">
+          <mxGeometry height="40" width="90" x="250" y="705" as="geometry" />
+        </mxCell>
+        <mxCell id="ea_o_id" edge="1" parent="1" source="o_id" style="endArrow=none;html=1;rounded=0;" target="Order" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o_status" parent="1" style="shape=ellipse;whiteSpace=wrap;html=1;" value="Статус" vertex="1">
+          <mxGeometry height="40" width="90" x="255" y="770" as="geometry" />
+        </mxCell>
+        <mxCell id="ea_o_status" edge="1" parent="1" source="o_status" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="Order" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o_amount" parent="1" style="shape=ellipse;whiteSpace=wrap;html=1;" value="Сумма" vertex="1">
+          <mxGeometry height="40" width="90" x="250" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="ea_o_amount" edge="1" parent="1" source="o_amount" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="Order" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t_id" parent="1" style="shape=ellipse;whiteSpace=wrap;html=1;" value="ID транз." vertex="1">
+          <mxGeometry height="40" width="90" x="250" y="1005" as="geometry" />
+        </mxCell>
+        <mxCell id="ea_t_id" edge="1" parent="1" source="t_id" style="endArrow=none;html=1;rounded=0;" target="Transaction" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t_method" parent="1" style="shape=ellipse;whiteSpace=wrap;html=1;" value="Способ" vertex="1">
+          <mxGeometry height="40" width="90" x="550" y="1005" as="geometry" />
+        </mxCell>
+        <mxCell id="ea_t_method" edge="1" parent="1" source="t_method" style="endArrow=none;html=1;rounded=0;" target="Transaction" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t_status" parent="1" style="shape=ellipse;whiteSpace=wrap;html=1;" value="Статус опл." vertex="1">
+          <mxGeometry height="40" width="90" x="405" y="1100" as="geometry" />
+        </mxCell>
+        <mxCell id="ea_t_status" edge="1" parent="1" source="t_status" style="endArrow=none;html=1;rounded=0;" target="Transaction" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_id" parent="1" style="shape=ellipse;whiteSpace=wrap;html=1;" value="ID дост." vertex="1">
+          <mxGeometry height="40" width="90" x="850" y="705" as="geometry" />
+        </mxCell>
+        <mxCell id="ea_d_id" edge="1" parent="1" source="d_id" style="endArrow=none;html=1;rounded=0;" target="Delivery" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_addr" parent="1" style="shape=ellipse;whiteSpace=wrap;html=1;" value="Адрес" vertex="1">
+          <mxGeometry height="40" width="90" x="705" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="ea_d_addr" edge="1" parent="1" source="d_addr" style="endArrow=none;html=1;rounded=0;" target="Delivery" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_status" parent="1" style="shape=ellipse;whiteSpace=wrap;html=1;" value="Статус" vertex="1">
+          <mxGeometry height="40" width="90" x="850" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="ea_d_status" edge="1" parent="1" source="d_status" style="endArrow=none;html=1;rounded=0;" target="Delivery" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

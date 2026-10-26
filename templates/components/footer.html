@@ -1,0 +1,49 @@
+<footer class="mt-auto bg-white border-t border-slate-200 text-slate-600 text-xs">
+    <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
+            <div>
+                <h4 class="font-bold text-slate-900 mb-2.5">Каталог</h4>
+                <ul class="space-y-1.5 text-slate-500">
+                    <li><a href="/catalog?category=Тормозная+система" class="hover:text-orange-600">Тормозная система</a></li>
+                    <li><a href="/catalog?category=Двигатель" class="hover:text-orange-600">Двигатель и ГРМ</a></li>
+                    <li><a href="/catalog?category=Подвеска" class="hover:text-orange-600">Подвеска и рулевое</a></li>
+                    <li><a href="/catalog?category=Фильтры" class="hover:text-orange-600">Фильтры (масляные, салонные)</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-slate-900 mb-2.5">Подбор по авто</h4>
+                <ul class="space-y-1.5 text-slate-500">
+                    <li><a href="/catalog?search=Toyota" class="hover:text-orange-600">Запчасти Toyota</a></li>
+                    <li><a href="/catalog?search=Volkswagen" class="hover:text-orange-600">Запчасти Volkswagen</a></li>
+                    <li><a href="/catalog?search=Ford" class="hover:text-orange-600">Запчасти Ford</a></li>
+                    <li><a href="/catalog?search=Hyundai" class="hover:text-orange-600">Запчасти Hyundai</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-slate-900 mb-2.5">Служба поддержки</h4>
+                <ul class="space-y-1.5 text-slate-500">
+                    <li>Тел: +375 (17) 200-00-00</li>
+                    <li>E-mail: support@autoparts.by</li>
+                    <li>Пн–Пт: 8:00 – 20:00, Сб: 9:00 – 18:00</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-slate-900 mb-2.5">Гарантия и стандарты</h4>
+                <p class="text-slate-500 leading-relaxed mb-2">
+                    Сертифицированные OEM и аналоги проверенных мировых брендов. Проверка совместимости по спецификациям.
+                </p>
+                <div class="inline-flex items-center gap-1.5 text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[11px] font-semibold border border-emerald-200">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                    Складской учет в реальном времени
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-400 text-[11px]">
+            <p>{{ t.footer_text if t else '© 2026 AutoParts. Информационная система управления интернет-магазином автозапчастей.' }}</p>
+            <div class="flex items-center gap-4">
+                <span>Минск, Беларусь</span>
+            </div>
+        </div>
+    </div>
+</footer>
