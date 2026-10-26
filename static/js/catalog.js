@@ -10,16 +10,29 @@ let searchDebounceTimer = null;
 
 // Available car models mapped by make (from real catalog data)
 const CAR_MODELS_BY_MAKE = {
-    'Toyota': ['Toyota Camry', 'Toyota Corolla', 'Toyota RAV4'],
-    'Volkswagen': ['Volkswagen Polo', 'Volkswagen Golf'],
-    'Hyundai': ['Hyundai Solaris', 'Hyundai Creta'],
-    'Kia': ['Kia Rio', 'Kia Sportage'],
-    'Ford': ['Ford Focus', 'Ford Mondeo'],
-    'Nissan': ['Nissan Qashqai'],
-    'Skoda': ['Skoda Octavia', 'Skoda Rapid'],
-    'Renault': ['Renault Duster', 'Renault Logan'],
+    'Audi': ['Audi A3', 'Audi A4', 'Audi A5', 'Audi A6', 'Audi Q5'],
+    'BMW': ['BMW 1 Series', 'BMW 3 Series', 'BMW 4 Series', 'BMW 5 Series', 'BMW X5'],
     'Chevrolet': ['Chevrolet Aveo', 'Chevrolet Cruze'],
-    'Mazda': ['Mazda 3']
+    'Ford': ['Ford Focus', 'Ford Mondeo', 'Ford Kuga', 'Ford C-Max'],
+    'Geely': ['Geely Coolray', 'Geely Atlas Pro', 'Geely Tugella', 'Geely Monjaro'],
+    'Haval': ['Haval Jolion', 'Haval F7', 'Haval Dargo'],
+    'Honda': ['Honda Civic', 'Honda CR-V', 'Honda Accord'],
+    'Hyundai': ['Hyundai Solaris', 'Hyundai Creta', 'Hyundai Tucson'],
+    'Kia': ['Kia Rio', 'Kia Sportage', 'Kia Ceed', 'Kia Seltos'],
+    'Lada': ['Lada Vesta', 'Lada Granta', 'Lada Largus', 'Lada XRAY', 'Lada Niva Legend'],
+    'Lexus': ['Lexus ES', 'Lexus RX', 'Lexus NX'],
+    'Mazda': ['Mazda 3', 'Mazda 6', 'Mazda CX-5'],
+    'Mercedes-Benz': ['Mercedes-Benz C-Class', 'Mercedes-Benz E-Class', 'Mercedes-Benz Sprinter'],
+    'Mitsubishi': ['Mitsubishi Outlander', 'Mitsubishi Lancer', 'Mitsubishi ASX'],
+    'Nissan': ['Nissan Qashqai', 'Nissan X-Trail', 'Nissan Teana'],
+    'Opel': ['Opel Astra', 'Opel Insignia'],
+    'Peugeot': ['Peugeot 308', 'Peugeot 408', 'Citroen C4'],
+    'Renault': ['Renault Logan', 'Renault Sandero', 'Renault Duster', 'Renault Kaptur', 'Renault Megane'],
+    'Skoda': ['Skoda Octavia', 'Skoda Rapid', 'Skoda Superb', 'Skoda Kodiaq', 'Skoda Fabia'],
+    'Subaru': ['Subaru Forester', 'Subaru Outback', 'Subaru XV', 'Subaru Impreza', 'Subaru Legacy'],
+    'Toyota': ['Toyota Camry', 'Toyota Corolla', 'Toyota RAV4', 'Toyota Land Cruiser Prado', 'Toyota Auris', 'Toyota Avensis'],
+    'Volkswagen': ['Volkswagen Polo', 'Volkswagen Golf', 'Volkswagen Passat', 'Volkswagen Tiguan', 'Volkswagen Touareg', 'Volkswagen Transporter'],
+    'Volvo': ['Volvo XC60', 'Volvo XC90', 'Volvo S60', 'Volvo V60']
 };
 
 function getEl(id) {
