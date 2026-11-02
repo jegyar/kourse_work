@@ -1,39 +1,39 @@
 {% extends "base.html" %}
 
-{% block title %}Вход в систему — AutoParts{% endblock %}
+{% block title %}{{ t.title_login }} — AutoParts{% endblock %}
 
 {% block content %}
 <div class="max-w-md mx-auto my-8">
     <div class="bg-white border border-slate-300 rounded p-6 shadow-subtle space-y-5">
         <div class="pb-3 border-b border-slate-100">
-            <h1 class="text-lg font-bold text-slate-900">Вход в систему AutoParts</h1>
-            <p class="text-xs text-slate-500 mt-0.5">Личный кабинет клиента и архив накладных</p>
+            <h1 class="text-lg font-bold text-slate-900">{{ t.login_h1 }}</h1>
+            <p class="text-xs text-slate-500 mt-0.5">{{ t.login_subtitle }}</p>
         </div>
 
         <form id="loginForm" class="space-y-3.5">
             <div>
                 <label for="email" class="block text-xs font-semibold text-slate-700 mb-1">
-                    Электронная почта (Логин)
+                    {{ t.login_email }}
                 </label>
                 <input type="email" id="email" name="username" required placeholder="name@company.by" class="w-full h-9 px-3 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800">
             </div>
 
             <div>
                 <label for="password" class="block text-xs font-semibold text-slate-700 mb-1">
-                    Пароль
+                    {{ t.login_password }}
                 </label>
                 <input type="password" id="password" name="password" required class="w-full h-9 px-3 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800">
             </div>
 
             <button type="submit" id="loginBtn" class="w-full h-9 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded transition-colors mt-2">
-                Войти в учетную запись
+                {{ t.login_btn }}
             </button>
         </form>
 
         <div class="pt-3 border-t border-slate-100 text-center text-xs text-slate-500">
-            Нет аккаунта?
+            {{ t.login_no_account }}
             <a href="/register" class="font-semibold text-orange-600 hover:underline ml-1">
-                Зарегистрироваться
+                {{ t.login_register_link }}
             </a>
         </div>
     </div>
@@ -42,11 +42,19 @@
 
 {% block extra_js %}
 <script>
+const _t = {
+    checking: "{{ t.login_checking }}",
+    success: "{{ t.login_success }}",
+    error: "{{ t.login_error }}",
+    connError: "{{ t.login_conn_error }}",
+    btn: "{{ t.login_btn }}"
+};
+
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = document.getElementById('loginBtn');
     btn.disabled = true;
-    btn.textContent = 'Проверка учетных данных...';
+    btn.textContent = _t.checking;
 
     const formData = new URLSearchParams();
     formData.append('username', document.getElementById('email').value.trim());
@@ -62,18 +70,18 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         if (response.ok) {
             const data = await response.json();
             setToken(data.access_token);
-            showNotification('Вход выполнен успешно', 'success');
+            showNotification(_t.success, 'success');
             setTimeout(() => window.location.href = '/', 700);
         } else {
             const error = await response.json();
-            showNotification(error.detail || 'Неверный логин или пароль', 'error');
+            showNotification(error.detail || _t.error, 'error');
             btn.disabled = false;
-            btn.textContent = 'Войти в учетную запись';
+            btn.textContent = _t.btn;
         }
     } catch (error) {
-        showNotification('Ошибка связи с сервером', 'error');
+        showNotification(_t.connError, 'error');
         btn.disabled = false;
-        btn.textContent = 'Войти в учетную запись';
+        btn.textContent = _t.btn;
     }
 });
 </script>

@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 
-{% block title %}Оформление заказа — AutoParts{% endblock %}
+{% block title %}{{ t.title_checkout }} — AutoParts{% endblock %}
 
 {% block content %}
 <div class="max-w-4xl mx-auto space-y-5">
     <!-- Breadcrumbs & Headline -->
     <div class="pb-3 border-b border-slate-200">
-        <nav class="flex items-center gap-1.5 text-xs text-slate-500 mb-1" aria-label="Хлебные крошки">
-            <a href="/" class="hover:text-slate-800">Главная</a>
+        <nav class="flex items-center gap-1.5 text-xs text-slate-500 mb-1" aria-label="Breadcrumbs">
+            <a href="/" class="hover:text-slate-800">{{ t.checkout_breadcrumb_home }}</a>
             <span>/</span>
-            <a href="/cart" class="hover:text-slate-800">Корзина</a>
+            <a href="/cart" class="hover:text-slate-800">{{ t.checkout_breadcrumb_cart }}</a>
             <span>/</span>
-            <span class="text-slate-800 font-semibold">Оформление</span>
+            <span class="text-slate-800 font-semibold">{{ t.checkout_breadcrumb }}</span>
         </nav>
         <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
-            Оформление заказа на поставку автодеталей
+            {{ t.checkout_h1 }}
         </h1>
     </div>
 
@@ -23,51 +23,51 @@
         <div class="lg:col-span-2 space-y-4">
             <form id="checkoutForm" class="bg-white border border-slate-300 rounded p-5 shadow-subtle space-y-4">
                 <h2 class="font-bold text-sm uppercase tracking-wider text-slate-900 pb-2 border-b border-slate-100">
-                    1. Адрес и контактные данные получателя
+                    {{ t.checkout_section1 }}
                 </h2>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                        <label for="city" class="block text-xs font-semibold text-slate-700 mb-1">Город / Населенный пункт *</label>
-                        <input type="text" id="city" required placeholder="Минск" class="w-full h-9 px-3 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800">
+                        <label for="city" class="block text-xs font-semibold text-slate-700 mb-1">{{ t.checkout_city }}</label>
+                        <input type="text" id="city" required placeholder="{{ t.checkout_city_placeholder }}" class="w-full h-9 px-3 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800">
                     </div>
                     <div>
-                        <label for="postal" class="block text-xs font-semibold text-slate-700 mb-1">Почтовый индекс *</label>
+                        <label for="postal" class="block text-xs font-semibold text-slate-700 mb-1">{{ t.checkout_postal }}</label>
                         <input type="text" id="postal" required placeholder="220000" class="w-full h-9 px-3 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800">
                     </div>
                     <div class="sm:col-span-2">
-                        <label for="address" class="block text-xs font-semibold text-slate-700 mb-1">Улица, номер дома, офис / квартира *</label>
-                        <input type="text" id="address" required placeholder="пр-т Победителей 45, оф. 12" class="w-full h-9 px-3 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800">
+                        <label for="address" class="block text-xs font-semibold text-slate-700 mb-1">{{ t.checkout_address }}</label>
+                        <input type="text" id="address" required placeholder="{{ t.checkout_address_placeholder }}" class="w-full h-9 px-3 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800">
                     </div>
                     <div class="sm:col-span-2">
-                        <label for="phone" class="block text-xs font-semibold text-slate-700 mb-1">Контактный телефон *</label>
-                        <input type="tel" id="phone" required placeholder="+375 (29) 000-00-00" class="w-full h-9 px-3 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800">
+                        <label for="phone" class="block text-xs font-semibold text-slate-700 mb-1">{{ t.checkout_phone }}</label>
+                        <input type="tel" id="phone" required placeholder="{{ t.checkout_phone_placeholder }}" class="w-full h-9 px-3 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800">
                     </div>
                 </div>
 
                 <h2 class="font-bold text-sm uppercase tracking-wider text-slate-900 pt-2 pb-2 border-b border-slate-100">
-                    2. Условия взаиморасчетов
+                    {{ t.checkout_section2 }}
                 </h2>
 
                 <div class="space-y-2 text-xs">
                     <label class="flex items-center gap-2.5 p-2.5 rounded border border-slate-300 hover:bg-slate-50 cursor-pointer">
                         <input type="radio" name="payment_method" value="card" checked class="text-orange-600 focus:ring-orange-500">
                         <div>
-                            <span class="font-bold text-slate-800">Банковская карта (онлайн-платеж)</span>
-                            <span class="text-slate-500 block text-[11px]">БЕЛКАРТ, Visa, MasterCard, МИР</span>
+                            <span class="font-bold text-slate-800">{{ t.checkout_pay_card }}</span>
+                            <span class="text-slate-500 block text-[11px]">{{ t.checkout_pay_card_sub }}</span>
                         </div>
                     </label>
                     <label class="flex items-center gap-2.5 p-2.5 rounded border border-slate-300 hover:bg-slate-50 cursor-pointer">
                         <input type="radio" name="payment_method" value="cash" class="text-orange-600 focus:ring-orange-500">
                         <div>
-                            <span class="font-bold text-slate-800">Оплата при получении курьеру</span>
-                            <span class="text-slate-500 block text-[11px]">Наличный расчет или банковский терминал</span>
+                            <span class="font-bold text-slate-800">{{ t.checkout_pay_cash }}</span>
+                            <span class="text-slate-500 block text-[11px]">{{ t.checkout_pay_cash_sub }}</span>
                         </div>
                     </label>
                 </div>
 
                 <button type="submit" id="submitOrderBtn" class="w-full h-10 bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs rounded transition-colors mt-2">
-                    Подтвердить и отправить заказ
+                    {{ t.checkout_submit }}
                 </button>
             </form>
         </div>
@@ -76,13 +76,13 @@
         <aside class="lg:col-span-1 sticky top-20">
             <div class="bg-white border border-slate-300 rounded p-4 shadow-subtle space-y-3">
                 <h3 class="font-bold text-xs uppercase tracking-wider text-slate-900 pb-2 border-b border-slate-100">
-                    Позиции к поставке
+                    {{ t.checkout_items_title }}
                 </h3>
                 <div id="checkoutItemsList" class="space-y-2 max-h-56 overflow-y-auto text-xs divide-y divide-slate-100">
-                    <div class="text-slate-400">Загрузка...</div>
+                    <div class="text-slate-400">{{ t.checkout_loading }}</div>
                 </div>
                 <div class="pt-2 border-t border-slate-200 flex justify-between items-baseline">
-                    <span class="text-xs font-bold text-slate-600">К оплате:</span>
+                    <span class="text-xs font-bold text-slate-600">{{ t.checkout_pay_label }}</span>
                     <span id="checkoutTotal" class="text-base font-extrabold text-slate-900">0.00 BYN</span>
                 </div>
             </div>
@@ -93,10 +93,19 @@
 
 {% block extra_js %}
 <script>
+const _t = {
+    errorAuth: "{{ t.checkout_error_auth }}",
+    processing: "{{ t.checkout_processing }}",
+    success: "{{ t.checkout_success }}",
+    error: "{{ t.checkout_error }}",
+    errorConn: "{{ t.checkout_error_conn }}",
+    submit: "{{ t.checkout_submit }}"
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
     const token = getToken();
     if (!token) {
-        showNotification('Необходима авторизация', 'warning');
+        showNotification(_t.errorAuth, 'warning');
         setTimeout(() => window.location.href = '/login', 1200);
         return;
     }
@@ -133,7 +142,7 @@ document.getElementById('checkoutForm').addEventListener('submit', async (e) => 
     e.preventDefault();
     const btn = document.getElementById('submitOrderBtn');
     btn.disabled = true;
-    btn.textContent = 'Обработка заявки...';
+    btn.textContent = _t.processing;
 
     const paymentEl = document.querySelector('input[name="payment_method"]:checked');
     const payload = {
@@ -153,19 +162,19 @@ document.getElementById('checkoutForm').addEventListener('submit', async (e) => 
         });
 
         if (resp && resp.ok) {
-            showNotification('Заказ успешно зарегистрирован', 'success');
+            showNotification(_t.success, 'success');
             if (typeof updateCartBadge === 'function') updateCartBadge();
             setTimeout(() => window.location.href = '/orders', 1000);
         } else if (resp) {
             const err = await resp.json();
-            showNotification(err.detail || 'Ошибка оформления', 'error');
+            showNotification(err.detail || _t.error, 'error');
             btn.disabled = false;
-            btn.textContent = 'Подтвердить и отправить заказ';
+            btn.textContent = _t.submit;
         }
     } catch (e) {
-        showNotification('Ошибка связи с сервером', 'error');
+        showNotification(_t.errorConn, 'error');
         btn.disabled = false;
-        btn.textContent = 'Подтвердить и отправить заказ';
+        btn.textContent = _t.submit;
     }
 });
 </script>

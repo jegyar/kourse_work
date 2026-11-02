@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 
-{% block title %}Корзина заказа — AutoParts{% endblock %}
+{% block title %}{{ t.title_cart }} — AutoParts{% endblock %}
 
 {% block content %}
 <div class="space-y-5 max-w-5xl mx-auto">
     <!-- Breadcrumbs & Headline -->
     <div class="pb-3 border-b border-slate-200">
-        <nav class="flex items-center gap-1.5 text-xs text-slate-500 mb-1" aria-label="Хлебные крошки">
-            <a href="/" class="hover:text-slate-800">Главная</a>
+        <nav class="flex items-center gap-1.5 text-xs text-slate-500 mb-1" aria-label="Breadcrumbs">
+            <a href="/" class="hover:text-slate-800">{{ t.cart_breadcrumb_home }}</a>
             <span>/</span>
-            <span class="text-slate-800 font-semibold">Корзина</span>
+            <span class="text-slate-800 font-semibold">{{ t.cart_breadcrumb }}</span>
         </nav>
         <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 flex items-center gap-3">
-            <span>Корзина заказа</span>
-            <span id="cartCountHeader" class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-200 text-slate-700">0 позиций</span>
+            <span>{{ t.cart_h1 }}</span>
+            <span id="cartCountHeader" class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-200 text-slate-700">0 {{ t.cart_positions }}</span>
         </h1>
     </div>
 
@@ -22,7 +22,7 @@
         <div class="lg:col-span-2 space-y-3" id="cartItemsContainer">
             <div id="cartItems" class="space-y-3">
                 <div class="p-6 bg-white border border-slate-200 rounded text-center text-xs text-slate-400">
-                    Загрузка позиций корзины...
+                    {{ t.cart_loading }}
                 </div>
             </div>
         </div>
@@ -31,34 +31,34 @@
         <aside class="lg:col-span-1 sticky top-20 space-y-4">
             <div class="bg-white border border-slate-300 rounded p-4 shadow-subtle space-y-4" id="cartSummaryCard">
                 <h2 class="font-bold text-sm uppercase tracking-wider text-slate-900 pb-2 border-b border-slate-200">
-                    Сводка заказа
+                    {{ t.cart_summary }}
                 </h2>
 
                 <div class="space-y-2 text-xs">
                     <div class="flex items-center justify-between text-slate-600">
-                        <span>Сумма позиций:</span>
+                        <span>{{ t.cart_subtotal }}</span>
                         <span class="font-bold text-slate-900" id="cartSubtotal">0.00 BYN</span>
                     </div>
                     <div class="flex items-center justify-between text-slate-600">
-                        <span>Доставка курьером:</span>
-                        <span class="font-semibold text-emerald-700" id="cartDelivery">Бесплатно</span>
+                        <span>{{ t.cart_delivery }}</span>
+                        <span class="font-semibold text-emerald-700" id="cartDelivery">{{ t.cart_delivery_free }}</span>
                     </div>
                 </div>
 
                 <div class="pt-3 border-t border-slate-200 flex items-baseline justify-between">
-                    <span class="text-xs font-bold uppercase text-slate-600">Итого к оплате:</span>
+                    <span class="text-xs font-bold uppercase text-slate-600">{{ t.cart_total_label }}</span>
                     <span class="text-lg font-black text-slate-900" id="cartTotal">0.00 BYN</span>
                 </div>
 
                 <button type="button" id="checkoutBtn" onclick="checkout()" disabled class="w-full h-10 px-4 bg-orange-600 hover:bg-orange-700 disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed text-white font-bold text-xs rounded transition-colors flex items-center justify-center gap-2">
-                    <span>Перейти к оформлению</span>
+                    <span>{{ t.cart_checkout_btn }}</span>
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                     </svg>
                 </button>
 
                 <a href="/catalog" class="block text-center text-xs text-slate-500 hover:text-slate-800 font-medium">
-                    ← Вернуться в каталог деталей
+                    {{ t.cart_back_catalog }}
                 </a>
             </div>
         </aside>

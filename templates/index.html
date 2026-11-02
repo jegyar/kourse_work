@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}AutoParts — Информационная система управления интернет-магазином автозапчастей{% endblock %}
+{% block title %}{{ t.title_index }}{% endblock %}
 
 {% block content %}
 <div class="space-y-8">
@@ -9,33 +9,33 @@
         <div class="max-w-3xl space-y-4">
             <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-slate-100 text-slate-700 text-xs font-semibold border border-slate-200">
                 <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                Складской комплекс и прямые поставки OEM-деталей
+                {{ t.index_badge }}
             </div>
 
             <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-snug">
-                Сертифицированные автозапчасти и расходные материалы
+                {{ t.index_h1 }}
             </h1>
 
             <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
-                Каталог оригинальных компонентов и качественных аналогов. Подбор по марке и модели автомобиля, проверка применяемости и складские остатки в реальном времени.
+                {{ t.index_desc }}
             </p>
 
             <!-- Search Form -->
             <form action="/catalog" method="GET" class="pt-2 flex flex-col sm:flex-row gap-2 max-w-xl">
                 <div class="relative flex-1">
-                    <input type="text" name="search" placeholder="Поиск по номеру запчасти, марке авто или названию..." class="w-full h-10 pl-9 pr-3 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800">
+                    <input type="text" name="search" placeholder="{{ t.index_search_placeholder }}" class="w-full h-10 pl-9 pr-3 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800">
                     <svg class="w-4 h-4 text-slate-400 absolute left-3 top-3 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                     </svg>
                 </div>
                 <button type="submit" class="h-10 px-5 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs rounded transition-colors whitespace-nowrap">
-                    Найти детали
+                    {{ t.index_search_btn }}
                 </button>
             </form>
 
             <!-- Quick Auto Makes Bar -->
             <div class="pt-2 flex flex-wrap items-center gap-2 text-xs">
-                <span class="text-slate-600 font-semibold">Популярные марки:</span>
+                <span class="text-slate-600 font-semibold">{{ t.index_popular_brands }}</span>
                 <a href="/catalog?search=Toyota" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">Toyota</a>
                 <a href="/catalog?search=Volkswagen" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">Volkswagen</a>
                 <a href="/catalog?search=Hyundai" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">Hyundai</a>
@@ -52,10 +52,10 @@
     <section class="space-y-4">
         <div class="flex items-center justify-between pb-2 border-b border-slate-200">
             <h2 class="text-base font-bold text-slate-900 uppercase tracking-wider">
-                Категории автокомпонентов
+                {{ t.index_categories_title }}
             </h2>
             <a href="/catalog" class="text-xs font-semibold text-orange-600 hover:text-orange-700">
-                Открыть полный каталог →
+                {{ t.index_open_catalog }}
             </a>
         </div>
 
@@ -65,71 +65,71 @@
                 <div class="w-16 h-16 flex items-center justify-center mb-2" id="icon-cat-brakes">
                     <!-- Loaded by script -->
                 </div>
-                <span class="font-bold text-xs text-slate-800 group-hover:text-orange-600 transition-colors">Тормозная система</span>
-                <span class="text-[11px] text-slate-600 mt-0.5">Колодки, диски</span>
+                <span class="font-bold text-xs text-slate-800 group-hover:text-orange-600 transition-colors">{{ t.index_cat_brakes }}</span>
+                <span class="text-[11px] text-slate-600 mt-0.5">{{ t.index_cat_brakes_sub }}</span>
             </a>
 
             <!-- 2. Фильтры -->
             <a href="/catalog?category=Фильтры" class="part-card p-4 flex flex-col items-center text-center group">
                 <div class="w-16 h-16 flex items-center justify-center mb-2" id="icon-cat-filters"></div>
-                <span class="font-bold text-xs text-slate-800 group-hover:text-orange-600 transition-colors">Фильтры</span>
-                <span class="text-[11px] text-slate-600 mt-0.5">Масляные, воздушные</span>
+                <span class="font-bold text-xs text-slate-800 group-hover:text-orange-600 transition-colors">{{ t.index_cat_filters }}</span>
+                <span class="text-[11px] text-slate-600 mt-0.5">{{ t.index_cat_filters_sub }}</span>
             </a>
 
             <!-- 3. Двигатель -->
             <a href="/catalog?category=Двигатель" class="part-card p-4 flex flex-col items-center text-center group">
                 <div class="w-16 h-16 flex items-center justify-center mb-2" id="icon-cat-engine"></div>
-                <span class="font-bold text-xs text-slate-800 group-hover:text-orange-600 transition-colors">Двигатель</span>
-                <span class="text-[11px] text-slate-600 mt-0.5">Ремни ГРМ, ролики</span>
+                <span class="font-bold text-xs text-slate-800 group-hover:text-orange-600 transition-colors">{{ t.index_cat_engine }}</span>
+                <span class="text-[11px] text-slate-600 mt-0.5">{{ t.index_cat_engine_sub }}</span>
             </a>
 
             <!-- 4. Подвеска -->
             <a href="/catalog?category=Подвеска" class="part-card p-4 flex flex-col items-center text-center group">
                 <div class="w-16 h-16 flex items-center justify-center mb-2" id="icon-cat-suspension"></div>
-                <span class="font-bold text-xs text-slate-800 group-hover:text-orange-600 transition-colors">Подвеска</span>
-                <span class="text-[11px] text-slate-600 mt-0.5">Амортизаторы, стойки</span>
+                <span class="font-bold text-xs text-slate-800 group-hover:text-orange-600 transition-colors">{{ t.index_cat_suspension }}</span>
+                <span class="text-[11px] text-slate-600 mt-0.5">{{ t.index_cat_suspension_sub }}</span>
             </a>
 
             <!-- 5. Система зажигания -->
             <a href="/catalog?category=Система+зажигания" class="part-card p-4 flex flex-col items-center text-center group">
                 <div class="w-16 h-16 flex items-center justify-center mb-2" id="icon-cat-ignition"></div>
-                <span class="font-bold text-xs text-slate-800 group-hover:text-orange-600 transition-colors">Система зажигания</span>
-                <span class="text-[11px] text-slate-600 mt-0.5">Свечи, катушки</span>
+                <span class="font-bold text-xs text-slate-800 group-hover:text-orange-600 transition-colors">{{ t.index_cat_ignition }}</span>
+                <span class="text-[11px] text-slate-600 mt-0.5">{{ t.index_cat_ignition_sub }}</span>
             </a>
 
             <!-- 6. Система охлаждения -->
             <a href="/catalog?category=Система+охлаждения" class="part-card p-4 flex flex-col items-center text-center group">
                 <div class="w-16 h-16 flex items-center justify-center mb-2" id="icon-cat-cooling"></div>
-                <span class="font-bold text-xs text-slate-800 group-hover:text-orange-600 transition-colors">Охлаждение</span>
-                <span class="text-[11px] text-slate-600 mt-0.5">Помпы, радиаторы</span>
+                <span class="font-bold text-xs text-slate-800 group-hover:text-orange-600 transition-colors">{{ t.index_cat_cooling }}</span>
+                <span class="text-[11px] text-slate-600 mt-0.5">{{ t.index_cat_cooling_sub }}</span>
             </a>
 
             <!-- 7. Электрика -->
             <a href="/catalog?category=Электрика" class="part-card p-4 flex flex-col items-center text-center group">
                 <div class="w-16 h-16 flex items-center justify-center mb-2" id="icon-cat-electric"></div>
-                <span class="font-bold text-xs text-slate-800 group-hover:text-orange-600 transition-colors">Электрика</span>
-                <span class="text-[11px] text-slate-600 mt-0.5">Генераторы, стартеры</span>
+                <span class="font-bold text-xs text-slate-800 group-hover:text-orange-600 transition-colors">{{ t.index_cat_electric }}</span>
+                <span class="text-[11px] text-slate-600 mt-0.5">{{ t.index_cat_electric_sub }}</span>
             </a>
 
             <!-- 8. Освещение -->
             <a href="/catalog?category=Освещение" class="part-card p-4 flex flex-col items-center text-center group">
                 <div class="w-16 h-16 flex items-center justify-center mb-2" id="icon-cat-lighting"></div>
-                <span class="font-bold text-xs text-slate-800 group-hover:text-orange-600 transition-colors">Освещение</span>
-                <span class="text-[11px] text-slate-600 mt-0.5">Лампы H7, H4, диоды</span>
+                <span class="font-bold text-xs text-slate-800 group-hover:text-orange-600 transition-colors">{{ t.index_cat_lighting }}</span>
+                <span class="text-[11px] text-slate-600 mt-0.5">{{ t.index_cat_lighting_sub }}</span>
             </a>
 
             <!-- 9. Трансмиссия -->
             <a href="/catalog?category=Трансмиссия" class="part-card p-4 flex flex-col items-center text-center group">
                 <div class="w-16 h-16 flex items-center justify-center mb-2" id="icon-cat-transmission"></div>
-                <span class="font-bold text-xs text-slate-800 group-hover:text-orange-600 transition-colors">Трансмиссия</span>
-                <span class="text-[11px] text-slate-600 mt-0.5">Сцепление, ШРУСы</span>
+                <span class="font-bold text-xs text-slate-800 group-hover:text-orange-600 transition-colors">{{ t.index_cat_transmission }}</span>
+                <span class="text-[11px] text-slate-600 mt-0.5">{{ t.index_cat_transmission_sub }}</span>
             </a>
 
             <!-- 10. Рулевое управление -->
             <a href="/catalog?category=Рулевое+управление" class="part-card p-4 flex flex-col items-center text-center group">
                 <div class="w-16 h-16 flex items-center justify-center mb-2" id="icon-cat-steering"></div>
-                <span class="font-bold text-xs text-slate-800 group-hover:text-orange-600 transition-colors">Рулевое управление</span>
-                <span class="text-[11px] text-slate-600 mt-0.5">Тяги, наконечники</span>
+                <span class="font-bold text-xs text-slate-800 group-hover:text-orange-600 transition-colors">{{ t.index_cat_steering }}</span>
+                <span class="text-[11px] text-slate-600 mt-0.5">{{ t.index_cat_steering_sub }}</span>
             </a>
         </div>
     </section>
@@ -139,19 +139,19 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
             <div class="pt-2 sm:pt-0">
                 <div class="text-2xl font-black text-slate-900" id="statProducts">—</div>
-                <div class="text-xs text-slate-600 font-medium mt-0.5">Артикулов в наличии</div>
+                <div class="text-xs text-slate-600 font-medium mt-0.5">{{ t.index_stat_products }}</div>
             </div>
             <div class="pt-2 sm:pt-0">
                 <div class="text-2xl font-black text-slate-900" id="statBrands">—</div>
-                <div class="text-xs text-slate-600 font-medium mt-0.5">Брендов-производителей</div>
+                <div class="text-xs text-slate-600 font-medium mt-0.5">{{ t.index_stat_brands }}</div>
             </div>
             <div class="pt-2 sm:pt-0">
                 <div class="text-2xl font-black text-slate-900" id="statCategories">—</div>
-                <div class="text-xs text-slate-600 font-medium mt-0.5">Категорий деталей</div>
+                <div class="text-xs text-slate-600 font-medium mt-0.5">{{ t.index_stat_categories }}</div>
             </div>
             <div class="pt-2 sm:pt-0">
                 <div class="text-2xl font-black text-emerald-700">100%</div>
-                <div class="text-xs text-slate-600 font-medium mt-0.5">Входной контроль качества</div>
+                <div class="text-xs text-slate-600 font-medium mt-0.5">{{ t.index_stat_quality }}</div>
             </div>
         </div>
     </section>

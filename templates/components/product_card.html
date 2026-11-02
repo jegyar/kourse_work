@@ -29,7 +29,7 @@
         <!-- Vehicle Application -->
         {% if product.car_model %}
             <p class="text-xs text-slate-500 mb-2 truncate">
-                Совместимость: <span class="font-medium text-slate-700">{{ product.car_model }}</span>
+                {{ t.product_compatibility }} <span class="font-medium text-slate-700">{{ product.car_model }}</span>
             </p>
         {% else %}
             <div class="h-4 mb-2"></div>
@@ -42,11 +42,11 @@
             <!-- Stock status -->
             {% if product.stock_quantity > 0 %}
                 <span class="stock-indicator text-emerald-700">
-                    <span class="stock-dot-in"></span> В наличии: {{ product.stock_quantity }} шт.
+                    <span class="stock-dot-in"></span> {{ t.product_in_stock }} {{ product.stock_quantity }} {{ t.product_in_stock_unit }}
                 </span>
             {% else %}
                 <span class="stock-indicator text-amber-700">
-                    <span class="stock-dot-out"></span> Склад: 2–3 дня
+                    <span class="stock-dot-out"></span> {{ t.product_order }}
                 </span>
             {% endif %}
 
@@ -71,11 +71,11 @@
                     <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
-                    <span>В корзину</span>
+                    <span>{{ t.product_add_to_cart }}</span>
                 </button>
             {% else %}
                 <button type="button" disabled class="btn-cart-compact flex-1 justify-center opacity-60">
-                    <span>Под заказ</span>
+                    <span>{{ t.product_order }}</span>
                 </button>
             {% endif %}
         </div>

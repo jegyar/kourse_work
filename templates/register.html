@@ -1,46 +1,46 @@
 {% extends "base.html" %}
 
-{% block title %}Регистрация — AutoParts{% endblock %}
+{% block title %}{{ t.title_register }} — AutoParts{% endblock %}
 
 {% block content %}
 <div class="max-w-md mx-auto my-8">
     <div class="bg-white border border-slate-300 rounded p-6 shadow-subtle space-y-5">
         <div class="pb-3 border-b border-slate-100">
-            <h1 class="text-lg font-bold text-slate-900">Регистрация в системе</h1>
-            <p class="text-xs text-slate-500 mt-0.5">Создание профиля для оформления заказов и сохранения истории</p>
+            <h1 class="text-lg font-bold text-slate-900">{{ t.register_h1 }}</h1>
+            <p class="text-xs text-slate-500 mt-0.5">{{ t.register_subtitle }}</p>
         </div>
 
         <form id="registerForm" class="space-y-3">
             <div class="grid grid-cols-2 gap-2.5">
                 <div>
-                    <label for="first_name" class="block text-xs font-semibold text-slate-700 mb-1">Имя</label>
-                    <input type="text" id="first_name" required placeholder="Иван" class="w-full h-9 px-3 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800">
+                    <label for="first_name" class="block text-xs font-semibold text-slate-700 mb-1">{{ t.register_first_name }}</label>
+                    <input type="text" id="first_name" required placeholder="Ivan" class="w-full h-9 px-3 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800">
                 </div>
                 <div>
-                    <label for="last_name" class="block text-xs font-semibold text-slate-700 mb-1">Фамилия</label>
-                    <input type="text" id="last_name" required placeholder="Иванов" class="w-full h-9 px-3 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800">
+                    <label for="last_name" class="block text-xs font-semibold text-slate-700 mb-1">{{ t.register_last_name }}</label>
+                    <input type="text" id="last_name" required placeholder="Ivanov" class="w-full h-9 px-3 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800">
                 </div>
             </div>
 
             <div>
-                <label for="email" class="block text-xs font-semibold text-slate-700 mb-1">Электронная почта</label>
+                <label for="email" class="block text-xs font-semibold text-slate-700 mb-1">{{ t.register_email }}</label>
                 <input type="email" id="email" required placeholder="name@company.by" class="w-full h-9 px-3 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800">
             </div>
 
             <div>
-                <label for="password" class="block text-xs font-semibold text-slate-700 mb-1">Пароль (мин. 6 символов)</label>
+                <label for="password" class="block text-xs font-semibold text-slate-700 mb-1">{{ t.register_password }}</label>
                 <input type="password" id="password" required minlength="6" class="w-full h-9 px-3 text-xs border border-slate-300 rounded focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800">
             </div>
 
             <button type="submit" id="registerBtn" class="w-full h-9 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded transition-colors mt-2">
-                Зарегистрировать профиль
+                {{ t.register_btn }}
             </button>
         </form>
 
         <div class="pt-3 border-t border-slate-100 text-center text-xs text-slate-500">
-            Уже зарегистрированы?
+            {{ t.register_have_account }}
             <a href="/login" class="font-semibold text-orange-600 hover:underline ml-1">
-                Войти
+                {{ t.register_login_link }}
             </a>
         </div>
     </div>
@@ -49,11 +49,19 @@
 
 {% block extra_js %}
 <script>
+const _t = {
+    creating: "{{ t.register_creating }}",
+    success: "{{ t.register_success }}",
+    error: "{{ t.register_error }}",
+    connError: "{{ t.register_conn_error }}",
+    btn: "{{ t.register_btn }}"
+};
+
 document.getElementById('registerForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = document.getElementById('registerBtn');
     btn.disabled = true;
-    btn.textContent = 'Создание учетной записи...';
+    btn.textContent = _t.creating;
 
     const payload = {
         first_name: document.getElementById('first_name').value.trim(),
@@ -70,7 +78,7 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
         });
 
         if (response.ok) {
-            showNotification('Регистрация завершена! Входим...', 'success');
+            showNotification(_t.success, 'success');
 
             const loginData = new URLSearchParams();
             loginData.append('username', payload.email);
@@ -91,14 +99,14 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
             }
         } else {
             const error = await response.json();
-            showNotification(error.detail || 'Ошибка регистрации', 'error');
+            showNotification(error.detail || _t.error, 'error');
             btn.disabled = false;
-            btn.textContent = 'Зарегистрировать профиль';
+            btn.textContent = _t.btn;
         }
     } catch (error) {
-        showNotification('Ошибка связи с сервером', 'error');
+        showNotification(_t.connError, 'error');
         btn.disabled = false;
-        btn.textContent = 'Зарегистрировать профиль';
+        btn.textContent = _t.btn;
     }
 });
 </script>

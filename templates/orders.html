@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 
-{% block title %}История заказов — AutoParts{% endblock %}
+{% block title %}{{ t.title_orders }} — AutoParts{% endblock %}
 
 {% block content %}
 <div class="space-y-5 max-w-4xl mx-auto">
     <!-- Breadcrumbs & Headline -->
     <div class="pb-3 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-            <nav class="flex items-center gap-1.5 text-xs text-slate-500 mb-1" aria-label="Хлебные крошки">
-                <a href="/" class="hover:text-slate-800">Главная</a>
+            <nav class="flex items-center gap-1.5 text-xs text-slate-500 mb-1" aria-label="Breadcrumbs">
+                <a href="/" class="hover:text-slate-800">{{ t.orders_breadcrumb_home }}</a>
                 <span>/</span>
-                <span class="text-slate-800 font-semibold">Заказы</span>
+                <span class="text-slate-800 font-semibold">{{ t.orders_breadcrumb }}</span>
             </nav>
             <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 flex items-center gap-2">
-                <span>Журнал заказов</span>
+                <span>{{ t.orders_h1 }}</span>
                 <span id="ordersCountBadge" class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-200 text-slate-700">0</span>
             </h1>
         </div>
@@ -22,7 +22,7 @@
     <!-- Orders Container -->
     <div id="ordersContainer" class="space-y-3">
         <div class="p-6 bg-white border border-slate-200 rounded text-center text-xs text-slate-400">
-            Загрузка списка заказов...
+            {{ t.orders_loading }}
         </div>
     </div>
 </div>
@@ -30,13 +30,28 @@
 
 {% block extra_js %}
 <script>
+const _t = {
+    loginRequired: "{{ t.orders_login_required }}",
+    loginBtn: "{{ t.orders_login_btn }}",
+    error: "{{ t.orders_error }}",
+    emptyTitle: "{{ t.orders_empty_title }}",
+    emptyDesc: "{{ t.orders_empty_desc }}",
+    toCatalog: "{{ t.orders_to_catalog }}",
+    order: "{{ t.orders_order }}",
+    spec: "{{ t.orders_spec }}",
+    specLoading: "{{ t.orders_spec_loading }}",
+    specError: "{{ t.orders_spec_error }}",
+    connError: "{{ t.orders_conn_error }}",
+    delivery: "{{ t.orders_delivery }}"
+};
+
 const statusMap = {
-    'new': ['Новый', 'status-new'],
-    'confirmed': ['Подтвержден', 'status-confirmed'],
-    'processing': ['В обработке', 'status-processing'],
-    'shipped': ['Отправлен', 'status-shipped'],
-    'delivered': ['Доставлен', 'status-delivered'],
-    'cancelled': ['Отменен', 'status-cancelled']
+    'new': ["{{ t.orders_status_new }}", 'status-new'],
+    'confirmed': ["{{ t.orders_status_confirmed }}", 'status-confirmed'],
+    'processing': ["{{ t.orders_status_processing }}", 'status-processing'],
+    'shipped': ["{{ t.orders_status_shipped }}", 'status-shipped'],
+    'delivered': ["{{ t.orders_status_delivered }}", 'status-delivered'],
+    'cancelled': ["{{ t.orders_status_cancelled }}", 'status-cancelled']
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -47,9 +62,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (container) {
             container.innerHTML = `
                 <div class="p-8 text-center bg-white border border-slate-200 rounded space-y-3">
-                    <p class="text-sm font-semibold text-slate-800">История заказов доступна после входа</p>
+                    <p class="text-sm font-semibold text-slate-800">${_t.loginRequired}</p>
                     <div class="pt-1">
-                        <a href="/login" class="px-4 py-2 bg-slate-900 text-white rounded text-xs font-semibold inline-block">Войти</a>
+                        <a href="/login" class="px-4 py-2 bg-slate-900 text-white rounded text-xs font-semibold inline-block">${_t.loginBtn}</a>
                     </div>
                 </div>
             `;
@@ -67,7 +82,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (container) {
             container.innerHTML = `
                 <div class="p-4 text-center text-xs text-rose-600 bg-rose-50 border border-rose-200 rounded">
-                    Ошибка при загрузке журнала заказов
+                    ${_t.error}
                 </div>
             `;
         }
@@ -84,10 +99,10 @@ function renderOrders(orders) {
     if (!orders || orders.length === 0) {
         container.innerHTML = `
             <div class="part-card py-12 px-4 text-center space-y-3">
-                <p class="text-sm font-semibold text-slate-800">Заказов пока не оформлено</p>
-                <p class="text-xs text-slate-500">После подтверждения заявки здесь появится ее номер, спецификация и статус.</p>
+                <p class="text-sm font-semibold text-slate-800">${_t.emptyTitle}</p>
+                <p class="text-xs text-slate-500">${_t.emptyDesc}</p>
                 <div class="pt-1">
-                    <a href="/catalog" class="px-4 py-2 bg-slate-900 text-white rounded text-xs font-semibold inline-block">В каталог</a>
+                    <a href="/catalog" class="px-4 py-2 bg-slate-900 text-white rounded text-xs font-semibold inline-block">${_t.toCatalog}</a>
                 </div>
             </div>
         `;
@@ -96,7 +111,7 @@ function renderOrders(orders) {
 
     let html = '';
     orders.forEach(o => {
-        const date = new Date(o.created_at).toLocaleString('ru-RU', {
+        const date = new Date(o.created_at).toLocaleString('{{ lang }}-{{ lang|upper }}', {
             day: '2-digit', month: '2-digit', year: 'numeric',
             hour: '2-digit', minute: '2-digit'
         });
@@ -107,7 +122,7 @@ function renderOrders(orders) {
         <div class="part-card p-4 space-y-3">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-100">
                 <div class="flex items-center gap-3">
-                    <span class="font-bold text-sm text-slate-900">Заказ #${o.order_id}</span>
+                    <span class="font-bold text-sm text-slate-900">${_t.order}${o.order_id}</span>
                     <span class="text-xs text-slate-400">${date}</span>
                 </div>
 
@@ -122,13 +137,13 @@ function renderOrders(orders) {
 
             <div class="flex items-center justify-between text-xs">
                 <button type="button" onclick="toggleDetails(${o.order_id})" class="text-orange-600 hover:text-orange-700 font-semibold flex items-center gap-1" id="btn-toggle-${o.order_id}">
-                    <span>Спецификация деталей</span>
+                    <span>${_t.spec}</span>
                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                 </button>
             </div>
 
             <div id="details-${o.order_id}" class="hidden pt-2 border-t border-slate-100 text-xs text-slate-600">
-                Загрузка спецификации...
+                ${_t.specLoading}
             </div>
         </div>
         `;
@@ -161,7 +176,7 @@ async function toggleDetails(orderId) {
                     <div class="pt-1.5 first:pt-0 flex items-center justify-between">
                         <div class="truncate pr-2">
                             <span class="font-medium text-slate-800">${i.name}</span>
-                            <span class="text-slate-400 ml-1">(${i.quantity} шт. × ${i.unit_price.toFixed(2)} BYN)</span>
+                            <span class="text-slate-400 ml-1">(${i.quantity} × ${i.unit_price.toFixed(2)} BYN)</span>
                         </div>
                         <div class="font-bold text-slate-900 whitespace-nowrap">
                             ${r},${k} BYN
@@ -174,17 +189,17 @@ async function toggleDetails(orderId) {
             if (order.delivery_address) {
                 itemsHtml += `
                     <div class="mt-2 text-[11px] text-slate-500">
-                        Адрес доставки: <span class="font-medium text-slate-700">${order.delivery_address}</span>
+                        ${_t.delivery} <span class="font-medium text-slate-700">${order.delivery_address}</span>
                     </div>
                 `;
             }
 
             detailsDiv.innerHTML = itemsHtml;
         } else {
-            detailsDiv.innerHTML = '<span class="text-rose-600 font-medium">Не удалось загрузить спецификацию</span>';
+            detailsDiv.innerHTML = `<span class="text-rose-600 font-medium">${_t.specError}</span>`;
         }
     } catch (e) {
-        detailsDiv.innerHTML = '<span class="text-rose-600 font-medium">Ошибка соединения</span>';
+        detailsDiv.innerHTML = `<span class="text-rose-600 font-medium">${_t.connError}</span>`;
     }
 }
 </script>
