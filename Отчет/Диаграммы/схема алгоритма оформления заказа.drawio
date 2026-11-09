@@ -1,90 +1,78 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.1 Chrome/142.0.7444.265 Electron/39.8.0 Safari/537.36" version="29.6.1">
   <diagram id="flowchart" name="Flowchart">
-    <mxGraphModel dx="1213" dy="828" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="2000" math="0" shadow="0">
+    <mxGraphModel dx="1866" dy="1274" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="2000" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="Start" parent="1" style="shape=ellipse;whiteSpace=wrap;html=1;" value="Начало" vertex="1">
-          <mxGeometry height="50" width="100" x="410" y="50" as="geometry" />
+        <mxCell id="Browse" parent="1" style="shape=rectangle;rounded=0;whiteSpace=wrap;html=1;" value="Просмотр каталога" vertex="1">
+          <mxGeometry height="50" width="120" x="400" y="250" as="geometry" />
         </mxCell>
-        <mxCell id="Browse" parent="1" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;" value="Просмотр каталога" vertex="1">
-          <mxGeometry height="50" width="120" x="400" y="150" as="geometry" />
-        </mxCell>
-        <mxCell id="AddCart" parent="1" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;" value="Добавление в корзину" vertex="1">
+        <mxCell id="AddCart" parent="1" style="shape=rectangle;rounded=0;whiteSpace=wrap;html=1;" value="Добавление в корзину" vertex="1">
           <mxGeometry height="50" width="120" x="90" y="350" as="geometry" />
         </mxCell>
         <mxCell id="CheckCart" parent="1" style="shape=rhombus;whiteSpace=wrap;html=1;" value="Корзина пуста?" vertex="1">
           <mxGeometry height="80" width="160" x="380" y="350" as="geometry" />
         </mxCell>
-        <mxCell id="Checkout" parent="1" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;" value="Переход к оформлению" vertex="1">
+        <mxCell id="Checkout" parent="1" style="shape=rectangle;rounded=0;whiteSpace=wrap;html=1;" value="Переход к оформлению" vertex="1">
           <mxGeometry height="50" width="120" x="400" y="480" as="geometry" />
         </mxCell>
         <mxCell id="LoginCheck" parent="1" style="shape=rhombus;whiteSpace=wrap;html=1;" value="Авторизован?" vertex="1">
           <mxGeometry height="80" width="160" x="380" y="580" as="geometry" />
         </mxCell>
-        <mxCell id="Auth" parent="1" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;" value="Авторизация / Регистрация" vertex="1">
+        <mxCell id="Auth" parent="1" style="shape=rectangle;rounded=0;whiteSpace=wrap;html=1;" value="Авторизация / Регистрация" vertex="1">
           <mxGeometry height="50" width="120" x="180" y="595" as="geometry" />
         </mxCell>
-        <mxCell id="DeliveryInfo" parent="1" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;" value="Ввод данных доставки" vertex="1">
+        <mxCell id="DeliveryInfo" parent="1" style="shape=rectangle;rounded=0;whiteSpace=wrap;html=1;" value="Ввод данных доставки" vertex="1">
           <mxGeometry height="50" width="120" x="400" y="710" as="geometry" />
         </mxCell>
         <mxCell id="StockCheck" parent="1" style="shape=rhombus;whiteSpace=wrap;html=1;" value="Товар в наличии?" vertex="1">
           <mxGeometry height="80" width="160" x="380" y="810" as="geometry" />
         </mxCell>
-        <mxCell id="StockError" parent="1" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;" value="Уведомление об отсутствии" vertex="1">
+        <mxCell id="StockError" parent="1" style="shape=rectangle;rounded=0;whiteSpace=wrap;html=1;" value="Уведомление об отсутствии" vertex="1">
           <mxGeometry height="50" width="120" x="180" y="825" as="geometry" />
         </mxCell>
-        <mxCell id="CartUpdate" parent="1" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;" value="Изменение корзины" vertex="1">
+        <mxCell id="CartUpdate" parent="1" style="shape=rectangle;rounded=0;whiteSpace=wrap;html=1;" value="Изменение корзины" vertex="1">
           <mxGeometry height="50" width="120" x="180" y="480" as="geometry" />
         </mxCell>
-        <mxCell id="PaymentChoice" parent="1" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;" value="Выбор способа оплаты" vertex="1">
+        <mxCell id="PaymentChoice" parent="1" style="shape=rectangle;rounded=0;whiteSpace=wrap;html=1;" value="Выбор способа оплаты" vertex="1">
           <mxGeometry height="50" width="120" x="400" y="940" as="geometry" />
         </mxCell>
-        <mxCell id="OrderCreate" parent="1" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;" value="Формирование заказа (&#39;new&#39;)" vertex="1">
+        <mxCell id="OrderCreate" parent="1" style="shape=rectangle;rounded=0;whiteSpace=wrap;html=1;" value="Формирование заказа (&#39;new&#39;)" vertex="1">
           <mxGeometry height="50" width="120" x="400" y="1040" as="geometry" />
         </mxCell>
-        <mxCell id="PaymentProcess" parent="1" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;" value="Процесс оплаты" vertex="1">
+        <mxCell id="PaymentProcess" parent="1" style="shape=rectangle;rounded=0;whiteSpace=wrap;html=1;" value="Процесс оплаты" vertex="1">
           <mxGeometry height="50" width="120" x="400" y="1140" as="geometry" />
         </mxCell>
         <mxCell id="PaymentCheck" parent="1" style="shape=rhombus;whiteSpace=wrap;html=1;" value="Оплата успешна?" vertex="1">
           <mxGeometry height="80" width="160" x="380" y="1240" as="geometry" />
         </mxCell>
-        <mxCell id="PaymentFail" parent="1" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;" value="Отмена заказа" vertex="1">
+        <mxCell id="PaymentFail" parent="1" style="shape=rectangle;rounded=0;whiteSpace=wrap;html=1;" value="Отмена заказа" vertex="1">
           <mxGeometry height="50" width="120" x="180" y="1255" as="geometry" />
         </mxCell>
-        <mxCell id="EndFail" parent="1" style="shape=ellipse;whiteSpace=wrap;html=1;" value="Конец (Отменен)" vertex="1">
-          <mxGeometry height="50" width="120" x="180" y="1355" as="geometry" />
+        <mxCell id="PaymentSuccess" parent="1" style="shape=rectangle;rounded=0;whiteSpace=wrap;html=1;" value="Статус: &#39;confirmed&#39;" vertex="1">
+          <mxGeometry height="50" width="120" x="660" y="1255" as="geometry" />
         </mxCell>
-        <mxCell id="PaymentSuccess" parent="1" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;" value="Статус: &#39;confirmed&#39;" vertex="1">
-          <mxGeometry height="50" width="120" x="400" y="1370" as="geometry" />
+        <mxCell id="DeductStock" parent="1" style="shape=rectangle;rounded=0;whiteSpace=wrap;html=1;" value="Списание остатков" vertex="1">
+          <mxGeometry height="50" width="120" x="660" y="1140" as="geometry" />
         </mxCell>
-        <mxCell id="DeductStock" parent="1" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;" value="Списание остатков" vertex="1">
-          <mxGeometry height="50" width="120" x="400" y="1470" as="geometry" />
+        <mxCell id="DeliveryPrep" parent="1" style="shape=rectangle;rounded=0;whiteSpace=wrap;html=1;" value="Передача в доставку" vertex="1">
+          <mxGeometry height="50" width="120" x="660" y="1050" as="geometry" />
         </mxCell>
-        <mxCell id="DeliveryPrep" parent="1" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;" value="Передача в доставку" vertex="1">
-          <mxGeometry height="50" width="120" x="400" y="1570" as="geometry" />
+        <mxCell id="Shipping" parent="1" style="shape=rectangle;rounded=0;whiteSpace=wrap;html=1;" value="Статус: &#39;shipped&#39;" vertex="1">
+          <mxGeometry height="50" width="120" x="660" y="950" as="geometry" />
         </mxCell>
-        <mxCell id="Shipping" parent="1" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;" value="Статус: &#39;shipped&#39;" vertex="1">
-          <mxGeometry height="50" width="120" x="400" y="1670" as="geometry" />
-        </mxCell>
-        <mxCell id="Delivered" parent="1" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;" value="Статус: &#39;delivered&#39;" vertex="1">
-          <mxGeometry height="50" width="120" x="400" y="1770" as="geometry" />
-        </mxCell>
-        <mxCell id="EndSuccess" parent="1" style="shape=ellipse;whiteSpace=wrap;html=1;" value="Конец (Успешно)" vertex="1">
-          <mxGeometry height="50" width="120" x="400" y="1870" as="geometry" />
-        </mxCell>
-        <mxCell id="f1" edge="1" parent="1" source="Start" style="endArrow=classic;html=1;rounded=0;" target="Browse" value="">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="Delivered" parent="1" style="shape=rectangle;rounded=0;whiteSpace=wrap;html=1;" value="Статус: &#39;delivered&#39;" vertex="1">
+          <mxGeometry height="50" width="120" x="660" y="850" as="geometry" />
         </mxCell>
         <mxCell id="f2" edge="1" parent="1" source="Browse" style="endArrow=classic;html=1;rounded=0;" target="AddCart" value="">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="150" y="175" />
+              <mxPoint x="150" y="275" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="f4" edge="1" parent="1" source="CheckCart" style="endArrow=classic;html=1;rounded=0;" target="Browse" value="Да">
-          <mxGeometry relative="1" x="-0.0667" as="geometry">
+          <mxGeometry relative="1" x="-0.2" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
@@ -153,8 +141,12 @@
         <mxCell id="lbl_f18" connectable="0" parent="f18" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Нет" vertex="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="f19" edge="1" parent="1" source="PaymentFail" style="endArrow=classic;html=1;rounded=0;" target="EndFail" value="">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="f19" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" target="Yma1kHNi6iGb0TlgFbHJ-2" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="250" y="1250" as="sourcePoint" />
+            <mxPoint x="240" y="1355" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="f20" edge="1" parent="1" source="PaymentCheck" style="endArrow=classic;html=1;rounded=0;" target="PaymentSuccess" value="Да">
           <mxGeometry relative="1" as="geometry" />
@@ -174,8 +166,10 @@
         <mxCell id="f24" edge="1" parent="1" source="Shipping" style="endArrow=classic;html=1;rounded=0;" target="Delivered" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="f25" edge="1" parent="1" source="Delivered" style="endArrow=classic;html=1;rounded=0;" target="EndSuccess" value="">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="f25" edge="1" parent="1" source="Delivered" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" target="Yma1kHNi6iGb0TlgFbHJ-3" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="750" y="1360" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="sMhDnEQvj6Tw-4TxB6l7-2" edge="1" parent="1" source="AddCart" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" target="CheckCart" value="">
           <mxGeometry height="50" relative="1" width="50" as="geometry">
@@ -183,17 +177,21 @@
             <mxPoint x="330" y="570" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="njLEXEbm2Hg6qjZKOiwh-1" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;" value="" vertex="1">
-          <mxGeometry height="60" width="100" x="650" y="410" as="geometry" />
+        <mxCell id="Yma1kHNi6iGb0TlgFbHJ-2" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;" value="Конец (Отменен)" vertex="1">
+          <mxGeometry height="60" width="100" x="200" y="1120" as="geometry" />
         </mxCell>
-        <mxCell id="njLEXEbm2Hg6qjZKOiwh-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" value="" vertex="1">
-          <mxGeometry height="100" width="100" x="570" y="140" as="geometry" />
+        <mxCell id="Yma1kHNi6iGb0TlgFbHJ-3" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;" value="Конец (Успешно)" vertex="1">
+          <mxGeometry height="60" width="100" x="670" y="720" as="geometry" />
         </mxCell>
-        <mxCell id="njLEXEbm2Hg6qjZKOiwh-3" parent="1" style="swimlane;startSize=0;" value="" vertex="1">
-          <mxGeometry height="200" width="200" x="770" y="50" as="geometry" />
+        <mxCell id="Yma1kHNi6iGb0TlgFbHJ-4" edge="1" parent="1" source="njLEXEbm2Hg6qjZKOiwh-1" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" target="Browse" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="460" y="100" as="sourcePoint" />
+            <mxPoint x="460" y="250" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="njLEXEbm2Hg6qjZKOiwh-4" parent="1" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" value="" vertex="1">
-          <mxGeometry height="60" width="100" x="670" y="280" as="geometry" />
+        <mxCell id="njLEXEbm2Hg6qjZKOiwh-1" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;" value="Начало" vertex="1">
+          <mxGeometry height="60" width="100" x="410" y="140" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
