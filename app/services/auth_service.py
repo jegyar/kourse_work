@@ -9,29 +9,51 @@ class AuthService:
         self.conn = conn
         self.cursor = self.conn.cursor()
 
+    import psycopg2
+    from psycopg2 import errors as pg_errors
+    from fastapi import HTTPException, status
+
     def register_user(self, user_data: UserCreate) -> UserResponse:
         """Регистрация нового пользователя."""
-        # Проверка, существует ли уже пользователь с таким email
-        self.cursor.execute('SELECT user_id FROM "User" WHERE email = %s', (user_data.email,))
-        if self.cursor.fetchone():
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Пользователь с таким email уже существует"
-            )
-
+        email = user_data.email.strip().lower()
         hashed_password = get_password_hash(user_data.password)
 
-        # Вставка нового пользователя. role_id по умолчанию 2 (client) согласно схеме.
-        self.cursor.execute(
-            """
-            INSERT INTO "User" (email, password_hash, first_name, last_name)
-            VALUES (%s, %s, %s, %s)
-            RETURNING user_id, email, first_name, last_name, role_id, created_at
-            """,
-            (user_data.email, hashed_password, user_data.first_name, user_data.last_name)
-        )
-        row = self.cursor.fetchone()
-        self.conn.commit()
+        try:
+            with self.conn.cursor() as cur:
+                cur.execute(
+                    """
+                    INSERT INTO "User" (email, password_hash, first_name, last_name)
+                    VALUES (%s, %s, %s, %s) ON CONFLICT (email) DO NOTHING
+                    RETURNING user_id, email, first_name, last_name, role_id, created_at
+                    """,
+                    (email, hashed_password, user_data.first_name, user_data.last_name),
+                )
+                row = cur.fetchone()
+
+            if row is None:
+                self.conn.rollback()
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail="Пользователь с таким email уже существует",
+                )
+
+            self.conn.commit()
+
+        except HTTPException:
+            raise
+        except pg_errors.UniqueViolation:
+            self.conn.rollback()
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Пользователь с таким email уже существует",
+            )
+        except psycopg2.Error:
+            self.conn.rollback()
+            logger.exception("Ошибка БД при регистрации пользователя")
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Внутренняя ошибка сервера",
+            )
 
         return UserResponse(
             user_id=row[0],
@@ -39,7 +61,7 @@ class AuthService:
             first_name=row[2],
             last_name=row[3],
             role_id=row[4],
-            created_at=row[5]
+            created_at=row[5],
         )
 
     def authenticate_user(self, login_data: UserLogin) -> dict:
